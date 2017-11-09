@@ -76,6 +76,9 @@
       <button type="submit" class="btn btn-default" id="search" value="search">
         Submit
       </button>
+      <button class="btn btn-default" id="sort" onclick="sort">
+        Sort Alphabetically
+      </button>
     </form>
   </div>
 
@@ -97,6 +100,18 @@
   <div class="footer navbar-fixed-bottom"> © 2017 Worcester Polytechnic Institute All Rights Reserved. </div>
 
   <script>
+    function getDataset() {
+      return Array.from(document.querySelectorAll('.pool .object')).map(x => x.innerText)
+    }
+    
+    function sort() {
+      const dataset = getDataset()
+      dataset.sort()
+
+      const pool = document.querySelector('#top')
+      const html = dataset.map(x => `<div id="${x}" class="object noSelect">${x}</div>`).join('\n')
+      pool.innerHTML = html
+    }
 
   // my own funcion from scratch
 
