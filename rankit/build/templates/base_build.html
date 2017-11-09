@@ -107,7 +107,10 @@
     function sort() {
       const dataset = getDataset()
       dataset.sort()
+      render(dataset)
+    }
 
+    function render(dataset) {
       const pool = document.querySelector('#top')
       const html = dataset.map(x => `<div id="${x}" class="object noSelect">${x}</div>`).join('\n')
       pool.innerHTML = html
