@@ -2,23 +2,68 @@
 
 {% extends 'base_build.html' %}
 {% block content %}
-          <div class="list-wrapper">
-            <div class="list middle"> <h2><b> Pairs </b></h2>
-            <div id="bot" class="list">
-              <div id="1" class="object noSelect">Enter Object Here</div>
-            </div>
+<style>
+  .pairwise {
+    display: grid;
+    grid-template-areas: "_ high low";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .high {
+    grid-area: high;
+    background-color: green;
+    padding: 24px;
+  }
+  .low {
+    grid-area: low;
+    background-color: red;
+    padding: 24px;
+  }
+</style>
 
-            <button id="submit" class="cd-btn cd-modal-trigger list middle">RANK!</button>
+<div class="pw-wrapper">
 
-          </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-    <div class="footer navbar-fixed-bottom"> © 2017 Worcester Polytechnic Institute All Rights Reserved. </div>
+  <div class="pairwise">
+    <div class="high"></div>
+    <div class="low"></div>
   </div>
+  <button id="submit" class="cd-btn cd-modal-trigger list middle">RANK!</button>
+</div>
 
+<script type = "text/javascript" src="{{ url_for('static', filename = 'js/dragula.min.js') }}"></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/pwc.js') }}" ></script>
+
+<script>
+  function handleSubmit() {
+    const pwl = generatePairwise()
+    sendPostRequest(pwl)
+  }
+  function generatePairwise() {
+    const highs = Array.from(document.querySelectorAll('.high .object')).map(x => x.id)
+    const lows = Array.from(document.querySelectorAll('.low .object')).map(x => x.id)
+
+    let pwl = []
+    for (let i = 0; i < highs.length; i++) {
+      pwl.push({ 'high': highs[i], 'low': lows[i] })
+    }
+    console.log(pwl)
+    return pwl
+  }
+  function sendPostRequest(pwl) {
+    const dataset_name = '{{dataset_name}}'
+    const url = '/build/submit/'
+    const xhr = new XMLHttpRequest()
+    xhr.open('POST', url, true)
+    xhr.setRequestHeader('Content-type', 'application/json')
+    // xhr.onload()
+    xhr.send(JSON.stringify({
+      dataset_name: dataset_name,
+      pairs: pwl
+    }))
+    xhr.onload = function () {
+      document.write(this.response)
+    }
+  }
+  document.querySelector('#submit').addEventListener('click', handleSubmit)
+</script>
 
 {% endblock %}
