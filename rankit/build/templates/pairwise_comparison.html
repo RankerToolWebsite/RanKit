@@ -12,27 +12,61 @@
     grid-area: high;
     background-color: green;
     padding: 24px;
+      display:inline;
   }
   .low {
     grid-area: low;
     background-color: red;
     padding: 24px;
+    display:inline;
   }
 </style>
 
 <div class="pw-wrapper">
 
   <div class="pairwise">
-    <div class="high"></div>
-    <div class="low"></div>
+    <div id="high"  class="list high"></div>
+    <div id="low"  class=" list low"></div>
   </div>
-  <button id="submit" class="cd-btn cd-modal-trigger list middle">RANK!</button>
+  <button id="submit" class="cd-btn cd-modal-trigger list middle" disabled="disabled">RANK!</button>
 </div>
 
 <script type = "text/javascript" src="{{ url_for('static', filename = 'js/dragula.min.js') }}"></script>
 <script type = "text/javascript" src = "{{ url_for('static', filename = 'js/pwc.js') }}" ></script>
 
 <script>
+
+
+
+var min_num_of_objects = 2
+
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            const high_length = document.querySelector('#high').children.length
+            const low_length = document.querySelector('#low').children.length
+            const list_num = (high_length > 0 ? 1 : 0) + (low_length > 0 ? 1 : 0)
+
+            if ((high_length != low_length) ||  (
+                    list_num < min_num_of_objects)){
+                $('#submit').attr('disabled', 'disabled');
+            }
+            else {
+                $('#submit').removeAttr('disabled');
+            }
+        });
+    });
+
+    // Node, config
+    var observerConfig = {
+        childList: true,
+    };
+
+    var high_node = document.getElementById('high');
+    var low_node = document.getElementById('low');
+    observer.observe(high_node, observerConfig);
+    observer.observe(low_node, observerConfig);
+
+
   function handleSubmit() {
     const pwl = generatePairwise()
     sendPostRequest(pwl)
