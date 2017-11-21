@@ -1,6 +1,6 @@
 const pool = document.querySelector('#top')
-const high = document.querySelector('.high')
-const low = document.querySelector('.low')
+const high = document.querySelector('#high')
+const low = document.querySelector('#low')
 
 const containers = [
   pool,

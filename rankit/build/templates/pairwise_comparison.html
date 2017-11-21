@@ -10,13 +10,13 @@
   }
   .high {
     grid-area: high;
-    background-color: green;
+    /* border: 5px solid #E74C3C; */
     padding: 24px;
-      display:inline;
+    display:inline;
   }
   .low {
     grid-area: low;
-    background-color: red;
+    /* border: 5px solid #E74C3C; */
     padding: 24px;
     display:inline;
   }
@@ -25,8 +25,20 @@
 <div class="pw-wrapper">
 
   <div class="pairwise">
-    <div id="high"  class="list high"></div>
-    <div id="low"  class=" list low"></div>
+    <div class="list high">
+      <h2><b> High </b></h2>
+      <div id="bot"  class="list">
+        <div id="high" class="list"></div>
+      </div>
+    </div>
+    <div class="list low">
+      <h2><b> Low </b></h2>
+      <div id="bot"  class="list">
+        <div id="low" class="list"></div>
+      </div>
+    </div>
+
+    <!-- <div id="low"  class=" list low"></div> -->
   </div>
   <!-- <button id="submit" class="cd-btn cd-modal-trigger list middle" disabled="disabled">RANK!</button> -->
 </div>
