@@ -7,7 +7,7 @@
 </head>
 <body>
   
-  <table id="example" class="display" cellspacing="0" width="100%">
+  <table id="table" class="display" cellspacing="0" width="100%">
     <thead>
         <tr id="head">
             <!-- <th>Name</th>
@@ -43,7 +43,11 @@
   function renderTable(data) {
     renderHead(data[0])
     renderData(data)
-    $('#example').DataTable()
+    $('#table').DataTable({
+      scrollY: '100vh',
+      scrollCollapse: true,
+      paging: false,
+    })
   }
 
   function renderHead(datum) {
