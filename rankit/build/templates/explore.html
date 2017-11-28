@@ -67,9 +67,11 @@
   }
   
   function parseData(raw) {
-    const data = JSON.parse(raw.substring(1, raw.length-1)).Prediction
-    const result = Object.keys(data).map(x => ({ rank: data[x], id: x }))
-    return result
+    const data = JSON.parse(raw.substring(1, raw.length-1))
+    console.log(data)
+    // const result = Object.keys(data).map(x => ({ rank: data[x], id: x }))
+    // return result
+    return data
   }
 
   const raw = '{{data|tojson}}'
