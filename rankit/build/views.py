@@ -56,6 +56,14 @@ def cc(dataset_name):
 
     return render_template('cc.html', dataset_name = dataset_name, dataset=datastore_ids)
 
+@build_blueprint.route('/build/<dataset_name>/pwc')
+def pwc(dataset_name):
+
+    # retrieve dataset
+    datastore_ids = filterByPrimaryKey(getDataset(dataset_name))
+
+    return render_template('pwc.html', dataset_name = dataset_name, dataset=datastore_ids)
+
 @build_blueprint.route('/build/list/<dataset_name>')
 def listComparison(dataset_name):
 
