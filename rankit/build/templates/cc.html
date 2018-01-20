@@ -117,8 +117,10 @@
     }
 
     #build-method .active {
-      background: #2980B9;
+      background: #2c3f52;
       color: #fff;
+      width: 100%;
+      text-align: center;
     }
 
     h1.title {
@@ -169,7 +171,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href={{ url_for( 'home.index') }}>RANKIT</a>
+      <a style="color:#2c3f52; font-weight:bold" class="navbar-brand" href={{ url_for( 'home.index') }}>RANKIT</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -209,7 +211,7 @@
   <div id="build-container">
 
     <!-- this is the header -->
-    <div class="build-pool-header">
+    <div style="background-color:#2c3f52;" class="build-pool-header">
 
       <h1 class="title">
         <b>
@@ -222,15 +224,15 @@
         <!-- search -->
         <input type="search" id="search-criteria" class="form-control" placeholder="Search by names..." onkeyup="searchDataset(event)">
         <!-- sort -->
-        <button type="button" class="semi-transparent-button btn " id="sort" onclick="sortDataset()">
+        <button style="color:#2c3f52;" type="button" class="semi-transparent-button btn " id="sort" onclick="sortDataset()">
           Sort
         </button>
         <!-- shuffle -->
-        <button type="button" class="semi-transparent-button btn " id="shuffle" onclick="shuffleDataset()">
+        <button style="color:#2c3f52;" type="button" class="semi-transparent-button btn " id="shuffle" onclick="shuffleDataset()">
           Shuffle
         </button>
         <!-- help -->
-        <button type="button" id="cd-tour-trigger" class="semi-transparent-button btn right">
+        <button style="color:#2c3f52;" type="button" id="cd-tour-trigger" class="semi-transparent-button btn right">
           <!-- <span class="glyphicon glyphicon glyphicon-info-sign" aria-hidden="true"></span> -->
           <p>Instructions</p>
         </button>
@@ -309,7 +311,7 @@
     <!-- this is the left side of the build view -->
     <div id="build-left">
         <!-- this is the pool -->
-      <div class="scrollingDragInner viewBackround">
+      <div style="position:relative; top: 7%;" class="scrollingDragInner viewBackround">
         <div id="top" class="pool">
           <!-- objects from dataset inserted here -->
           {% for x in dataset %}
@@ -324,21 +326,21 @@
     <div id="build-right">
       <!-- this is the header -->
       <ul id="build-method">
-        <li><a id="lc">List</a></li>
-        <li><a id="cc" class="active">Categorical</a></li>
-        <li><a id="pwc">Pairwise</a></li>
+        <li><a style="color:#2c3f52" id="lc">List</a></li>
+        <li style="text-align:center"><a id="cc" class="active">Categorical</a></li>
+        <li><a style="color:#2c3f52" id="pwc">Pairwise</a></li>
       </ul>
       <div class="cc-list">
         <!-- this is the lists -->
-        <div class="legend-label">HIGH</div>
+        <div style="color:#2c3f52;" class="legend-label">HIGH</div>
         <div class="scrollingDragInner box">
           <div id="left" class="list ccb"></div>
         </div>
-        <div class="legend-label">MEDIUM</div>
+        <div style="color:#2c3f52;" class="legend-label">MEDIUM</div>
         <div class="scrollingDragInner box">
           <div id="center" class="list ccb"></div>
         </div>
-        <div class="legend-label">LOW</div>
+        <div style="color:#2c3f52;" class="legend-label">LOW</div>
         <div class="scrollingDragInner box">
           <div id="right" class="list ccb"></div>
         </div>
