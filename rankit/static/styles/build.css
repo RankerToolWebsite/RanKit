@@ -142,7 +142,7 @@
 
     .build-pool-header {
       grid-area: build-top;
-      background-color:#2980B9;
+      background-color:#2c3f52;
       min-height: 82px;
       padding: 16px;
     }
