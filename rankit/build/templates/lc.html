@@ -485,10 +485,7 @@ $('body').on('click', function (e) {
           <div id="top" class="pool">
             <!-- objects from dataset inserted here -->
             {% for x in dataset %}
-            <div tabindex="0" id="{{x}}" class="object noSelect pop" data-toggle="popover" data-trigger="hover" data-html="true">{{x}}</div>
-            <script>
-            displayAttributes('{{x}}')
-            </script>
+            <div id="{{x}}" class="object noSelect pop">{{x}}</div>
             {% endfor %}
           </div>
         </div>
@@ -582,7 +579,7 @@ function searchDataset(e) {
 
 function render(dataset) {
   const pool = document.querySelector('#top')
-  const html = dataset.map(x => `<div tabindex="0" id="${x}" class="object noSelect pop" data-toggle="popover" data-trigger="hover">${x}</div>`).join('\n')
+  const html = dataset.map(x => `<div id="${x}" class="object noSelect pop">${x}</div>`).join('\n')
   pool.innerHTML = html
 }
 </script>
@@ -1061,11 +1058,7 @@ function lc_populateBox() {
     node.appendChild(textnode);
     node.setAttribute("id", lc_objectsFromURL[i]);
     node.setAttribute("class", "object noSelect pop");
-    node.setAttribute("tabindex", "0");
-    node.setAttribute("data-toggle", "popover");
-    node.setAttribute("data-trigger", "hover");
     document.querySelector('#lc-center').appendChild(node);
-    displayAttributes(lc_objectsFromURL[i])
     handleBuildSubmit()
   }
 }

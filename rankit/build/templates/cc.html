@@ -452,10 +452,7 @@
         <div id="top" class="pool">
           <!-- objects from dataset inserted here -->
           {% for x in dataset %}
-          <div tabindex="0" id="{{x}}" class="object noSelect pop" data-toggle="popover" data-trigger="hover">{{x}}</div>
-          <script>
-            displayAttributes('{{x}}')
-          </script>
+          <div id="{{x}}" class="object noSelect pop">{{x}}</div>
           {% endfor %}
         </div>
       </div>
@@ -541,7 +538,7 @@
 
     function render(dataset) {
       const pool = document.querySelector('#top')
-      const html = dataset.map(x => `<div tabindex="0" id="${x}" class="object noSelect pop" data-toggle="popover" data-trigger="hover">${x}</div>`).join('\n')
+      const html = dataset.map(x => `<div id="${x}" class="object noSelect pop">${x}</div>`).join('\n')
       pool.innerHTML = html
     }
   </script>
@@ -1276,11 +1273,7 @@
         node.appendChild(textnode);
         node.setAttribute("id", objectsFromURL[i]);
         node.setAttribute("class", "object noSelect pop");
-        node.setAttribute("tabindex", "0");
-        node.setAttribute("data-toggle", "popover");
-        node.setAttribute("data-trigger", "hover");
         document.querySelector(box).appendChild(node);
-        displayAttributes(objectsFromURL[i])
         handleBuildSubmit()
       }
     }
