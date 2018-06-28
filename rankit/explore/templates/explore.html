@@ -8,9 +8,6 @@
   <title>RANKIT Explore</title>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/pace.min.js') }}"></script>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/loadingScreen.css') }}" />
-  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/fixedcolumns/3.2.4/css/fixedColumns.dataTables.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/bootstrap.min.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/build.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/reset.css') }}" />
@@ -82,12 +79,12 @@
   }
 
   .dataTables_scrollHead {
-    overflow: visible !important;
+    overflow: hidden !important;
 
   }
 
   .dataTables_scrollBody {
-    overflow: visible !important;
+    overflow: auto !important;
 
   }
   #TableData{
@@ -406,8 +403,8 @@
 
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/jquery-1.12.4.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/dataTables.fixedColumns.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/dataTables.fixedColumns.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/scripts.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/lib/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>
@@ -449,17 +446,14 @@ function shadeRowsByconf(data){
      trs[i].cells[1].style.backgroundColor = highlightColor(score, "#e3f7f3","#337c6e");
      trs[i].cells[1].setAttribute("data-html", "true");
      trs[i].cells[1].title="Confidence" + "||<br />" + "Score";
+     trs[i].cells[1].setAttribute("tabindex", "0");
      trs[i].cells[1].setAttribute("data-toggle", "popover");
-     //trs[i].cells[1].setAttribute("data-trigger", "focus");
+     trs[i].cells[1].setAttribute("data-trigger", "focus");
      trs[i].cells[1].setAttribute("data-content", confidence + "||<br />" + score);
      trs[i].cells[1].setAttribute("data-container","body");
      trs[i].cells[2].style.backgroundColor = highlightColor(score, "#e3f7f3","#337c6e");
   }
   $('[data-toggle="popover"]').popover();
-//  $('.popover-dismiss').popover({
-//    trigger: 'focus'
-//  })
-
 }
 
 </script>
@@ -570,12 +564,15 @@ function renderTable(data) {
   var table =  $('#table').DataTable({
     sScrollY: '100vh',
     sScrollX:  '100%',
-    scrollCollapse: true,
+    sScrollXInner: '100%',
+    bscrollCollapse: false,
     pageLength: 25,
     searching: true,
-  //  fixedColumns: {
-  //    leftColumns: 3,
-  //  },
+    fixedColumns: {
+      leftColumns: 3,
+      heightMatch: "auto",
+      rightColumns: 0
+    },
   });
 
   $('#table').on('draw.dt', function(e) {
@@ -616,16 +613,9 @@ function renderHead(datum) {
   return data
 }
 
-function setBarColor(dataConf) {
-  //return highlightColor(dataConf, "#FB8072", "#3F3A3C")
-  return "#6a6265";
-}
 
 function renderData(data, keys) {
   var t = $('#table').dataTable();
-  // CODE TO DELETE IF NOT WORKING -PHS 2018
-  //t.Columns.remove("Confidence");
-
 
   let maxScore = -1; // Is this true?? can a score be negative
   data.forEach(function(row) {
@@ -642,7 +632,7 @@ function renderData(data, keys) {
     const dataConf = x.Confidence;
     x.Score = `
     <div class="bar-chart-bar">
-    <div class="inTableBar" style="width: ${(dataScore / ((maxScore !== 0) ? maxScore : 0.01)) * 100}%;background-color:${setBarColor(dataConf)}"></div>
+    <div class="inTableBar" style="width: ${(dataScore / ((maxScore !== 0) ? maxScore : 0.01)) * 100}%;background-color: #6a6265"></div>
     </div>
     `
     var props = keys

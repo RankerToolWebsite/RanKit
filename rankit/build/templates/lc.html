@@ -39,7 +39,7 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
     #build-method .active {
     width: 200%;
   }
@@ -223,6 +223,7 @@ var confidence = 0
 var weights = 0
 var counter = 0
 var tooltipCounter = 0
+var colorScheme = ["#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5"];
 </script>
 
 
@@ -242,7 +243,7 @@ var tooltipCounter = 0
     function parseData(raw) {
       return JSON.parse(raw.substring(1, raw.length - 1))
     }
-    
+
     function findObject (objectTitle) {
       const raw = '{{data|tojson}}'
       const data = parseData(raw)
@@ -349,18 +350,6 @@ var lc_observer = new MutationObserver(function (mutations) {
       $('#lc-submit').removeAttr('disabled');
       handleBuildSubmit()
     }
-    barUpdate(confidence)
-
-    var colorScheme = ["#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5"];
-    console.log(counter);
-    if (counter == 1) {
-      d3.select("body").selectAll("svg").remove();
-      console.log(weights);
-      renderBarChart(weights,"#chart", colorScheme);
-    } else if(weights != 0){
-      document.getElementById("p1").innerHTML = "Impact of Attributes on Dataset Ranking";
-      renderBarChart(weights,"#chart", colorScheme);
-    }
   });
 });
 
@@ -446,8 +435,7 @@ var lc_objectsFromURL = {}
 lc_objectsFromURL = lc_getParametersFromURL()
 
 if (lc_objectsFromURL !== undefined) {
-  lc_populateBox()
-  barUpdate(confidence)
+  lc_populateBox();
 }
 
 function lc_populateBox() {
@@ -462,10 +450,9 @@ function lc_populateBox() {
     node.setAttribute("tabindex", "0");
     node.setAttribute("data-toggle", "popover");
     document.querySelector('#lc-center').appendChild(node);
-    handleBuildSubmit()
+    handleBuildSubmit();
   }
 }
-
 
 function getRankedObjects() {
   return Array.from(document.querySelector('#lc-center').children).map(x => x.innerText)
@@ -498,6 +485,17 @@ function handleBuildSubmit() {
     xhr.onload = function () {
       weights = JSON.parse(JSON.parse(this.response).weights)
       confidence = JSON.parse(this.response).confidence
+      /* Both the Confidence bar and BarChart are rendered here, ensuring that it renders at all times */
+      barUpdate(confidence);
+      console.log(counter);
+      if (counter == 1) {
+        d3.select("body").selectAll("svg").remove();
+        console.log("WEIGHT: " + weights);
+        renderBarChart(weights,"#chart", colorScheme);
+      } else if(weights != 0){
+        document.getElementById("p1").innerHTML = "Impact of Attributes on Dataset Ranking";
+        renderBarChart(weights,"#chart", colorScheme);
+      }
     }
   }
 }
