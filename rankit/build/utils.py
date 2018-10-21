@@ -29,7 +29,7 @@ def getRanking(dataset_name, primaryKeyPairs):
     pairs = pd.read_json(pairs_json)
 
     dataset = pd.read_json(json.dumps(dataset_list))
-
+    print(pairs)
     rank, weights, confidence = build_rank.build(dataset=dataset, pairs=pairs)
     return rank.to_json(orient='records'), weights, confidence
 

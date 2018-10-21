@@ -47,8 +47,8 @@ def clean_dataset(dataset, primary_key):
 def get_training(dataset,pairs):
     X = []
     y = []
-    print(pairs)
     for i in range(len(pairs["high"])):
+
         X.append(np.array(dataset.iloc[pairs["high"][i]]-dataset.iloc[pairs["low"][i]]))
         y.append(1)
         X.append(np.array(dataset.iloc[pairs["low"][i]]-dataset.iloc[pairs["high"][i]]))
