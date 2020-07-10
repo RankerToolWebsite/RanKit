@@ -2,6 +2,10 @@
 
 RANKIT is an interactive online system for personalized rank building and data visualization. Many publically available rankings do not expose the attributes used to compose the ranking, and do not allow for users to input their own preferences to manipulate the ranking. RanKit allows users to input their preferences about a few items in the dataset, and then automatically generate a ranking over all items that reflects this personalized input. Visual feedback provides information on the learned attribute weights and confidence of the ranking model.  
 
+The system was demonstrated at the 2018 CIKM conference in the paper [Preference-driven Interactive Ranking System for Personalized Decision Support](https://dl.acm.org/doi/10.1145/3269206.3269227) by Caitlin Kuhlman, MaryAnn VanValkenburg, Diana Doherty, Malika Nurbekova, Goutham Deva, Zarni Phyo, Elke Rundensteiner, Lane Harrison. 
+ 
+View an online demo of the tool [here.](http://rankit.wpi.edu)
+
 RANKIT is composed of two tools: Explore and Build. To learn more about each tool, read our [guide](https://github.com/RankerToolWebsite/myRanker/wiki).
 
 ## Tool: Build
