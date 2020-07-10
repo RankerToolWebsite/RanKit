@@ -1,37 +1,29 @@
 # RANKIT
 
-RANKIT allows users to manipulate rankings through personalized data visualization and rank building. When interpreting multi-attribute datasets, a slight change of weight between attributes can heavily impact ranking results. Most publically available rankings do not expose the attributes used to compose the ranking. This lack of disclosure results in possible exploitation of data because rankings can imply a conclusion that is not necessarily true.
+RANKIT is an interactive online system for personalized rank building and data visualization. Many publically available rankings do not expose the attributes used to compose the ranking, and do not allow for users to input their own preferences to manipulate the ranking. RanKit allows users to input their preferences about a few items in the dataset, and then automatically generate a ranking over all items that reflects this personalized input. Visual feedback provides information on the learned attribute weights and confidence of the ranking model.  
 
-To allow for unbiased extrapolation of data, RANKIT is composed of two tools: Explore and Build.
-
-To learn more about each tool, read our [guide](https://github.com/RankerToolWebsite/myRanker/wiki).
+RANKIT is composed of two tools: Explore and Build. To learn more about each tool, read our [guide](https://github.com/RankerToolWebsite/myRanker/wiki).
 
 ## Tool: Build
 
-Build is a machine learning tool that is trained through user selected preferences of rank object instances. The Build tool collects data from pairwise comparisons of sample objects completed by the user. The tool applies a regression analysis to this data and determines a pattern and ranks all object within a dataset according to that pattern.
+The build page is an interactive interface where users input their preferences about items to be ranked. The Build tool collects data from pairwise comparisons of sample objects completed by the user. The tool applies a pairwise learning-to-rank model to the user input to create a global ranking over all items.
 
 ## Tool: Explore
 
-Explore is an interactive tool that allows you to view and query through dataset information:
-
-- Visualize a dataset and its attribute independent of the Build Tool
-- Observe a personalized ranking of the entire dataset from partial rankings formulated in Build 
-	- Displays attributes by their relative importance on the dataset’s ranking
+Explore is an interactive tool that allows you to view the global ranking learned by the model and the underlying model weights and data attributes.
 
 ## Getting Started
 
 ### Prerequisites:
 
+- [Python 3](https://www.python.org)
+
+- [Pip](https://pypi.python.org/pypi/pip)
+
 - [npm](https://www.npmjs.com/)
 	- `$ sudo apt-get install npm`
 - [Node.js](http://nodejs.org/)
 	- `$ sudo apt-get install -y nodejs`
-- [Yeoman](http://yeoman.io/)
-	- `$ npm install -g yo`
-- [Phovea Generator](https://github.com/phovea/generator-phovea)
-	- `$ npm install -g github:phovea/generator-phovea`
-- [Python 3](https://www.python.org)
-- [Pip](https://pypi.python.org/pypi/pip)
 - [Flask](http://flask.pocoo.org/)
 	- `$ pip install Flask`
 
